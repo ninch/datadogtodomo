@@ -1,0 +1,23 @@
+#!/usr/bin/python
+
+print '*** from datadog.api'
+
+# private library
+from apis.base import Api
+
+class Domo(Api):
+
+    def __init__(self):
+        Api.__init__(self)
+        self.client_id = None
+        self.secret    = None
+
+    def _getConfig(self):
+        configParser = self._readApiKeys('.apikeys.cfg')
+        self.client_id = configParser.get('DOMO', 'client_id')
+        self.secret = configParser.get('DOMO', 'secret')
+
+    def hello(self):
+        return 'hello from domo.api.Domo'
+
+
